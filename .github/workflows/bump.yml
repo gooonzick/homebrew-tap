@@ -1,0 +1,28 @@
+name: Bump casks
+
+# Checks the apps' latest releases and commits new versions. Runs hourly and on demand,
+# so the app repos need no token for this repository.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bump
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./scripts/bump.sh
+      - name: Commit
+        run: |
+          git diff --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Bump $(git diff --name-only | sed 's#Casks/##; s#\.rb##' | paste -sd, -)"
+          git push
