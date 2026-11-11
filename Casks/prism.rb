@@ -13,7 +13,7 @@ cask "prism" do
   end
 
   depends_on arch: :arm64
-  depends_on :macos
+  depends_on macos: :ventura
 
   app "Prism.app"
   binary "#{appdir}/Prism.app/Contents/MacOS/prism"

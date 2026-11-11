@@ -4,6 +4,7 @@ Homebrew casks for [Prism](https://github.com/gooonzick/prism) and
 [Keysmith](https://github.com/gooonzick/keysmith). macOS, Apple silicon.
 
 ```bash
+brew tap gooonzick/tap && brew trust gooonzick/tap
 brew install --cask gooonzick/tap/prism
 brew install --cask gooonzick/tap/keysmith
 ```
